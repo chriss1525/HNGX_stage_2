@@ -6,10 +6,10 @@ Welcome to the API documentation for the /api endpoint, which interacts with a S
 This API allows you to perform CRUD (Create, Read, Update, Delete) operations on a "person" table in the database.
 
 ## Table of Contents
-- [Standard Formats for Requests and Responses](#Standard Formats for Requests and Assumptions)
-- [Sample Usage of the API](#Sample Usage of the API)
-- [Known Limitations and Assumptions](#Known Limitations and Assumptions)
-- [Setting up and Deploying the API](#Setting up and Deploying the API)
+- [Standard Formats for Requests and Responses](#Standard-Formats-for-Requests-and-Assumptions)
+- [Sample Usage of the API](#Sample-Usage-of-the-API)
+- [Known Limitations and Assumptions](#Known-Limitations-and-Assumptions)
+- [Setting up and Deploying the API](#Setting-up-and-Deploying-the-API)
 
 ### Standard Formats for Requests and Responses
 
@@ -80,7 +80,6 @@ GET /api/John_Doe
 **Example Response:**
 
 ```json
-Copy code
 {
   "id": 1,
   "name": "John Doe",
@@ -105,7 +104,7 @@ PUT /api/1
 Content-Type: application/json
 
 {
-  "age": 31
+  "name": "Jane_Doe"
 }
 ```
 **Example Request (Update by Name):**
@@ -115,7 +114,7 @@ PUT /api/John_Doe
 Content-Type: application/json
 
 {
-  "age": 26
+  "name": "Jane_Doe"
 }
 ```
 
@@ -131,7 +130,7 @@ Content-Type: application/json
 ```json
 {
   "id": 1,
-  "name": "John Doe",
+  "name": "Jane_Doe",
 }
 ```
 #### Delete a Person (DELETE /api/:param)
