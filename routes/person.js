@@ -122,7 +122,7 @@ router.delete('/:param', validateIntegerOrString, async (req, res) => {
     return res.status(400).json({ error: error.message });
   }
 
-  if (!data || data.length === 0) {
+  if (!data) {
     return res.status(404).json({ error: 'Person not found.' });
   }
 
