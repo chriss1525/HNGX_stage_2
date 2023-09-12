@@ -49,10 +49,13 @@ This API allows you to perform CRUD (Create, Read, Update, Delete) operations on
 **Example Response Body:**
 
 ```json
-{
-  "id": 1,
-  "name": "John Doe",
-}
+[
+    {
+        "id": 1,
+        "created_at": "2023-09-12T15:14:47.67992+00:00",
+        "name": "Christine"
+    }
+]
 ```
 #### Read One Person (GET /api/:param)
 
@@ -86,10 +89,11 @@ GET /api/John Doe
 **Example Response Body:**
 
 ```json
-{
-  "id": 1,
-  "name": "John Doe",
-}
+    {
+        "id": 1,
+        "created_at": "2023-09-12T15:14:47.67992+00:00",
+        "name": "Christine"
+    }
 ```
 
 #### Update a Person's Data (PUT /api/:param)
