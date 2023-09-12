@@ -6,6 +6,7 @@ This API allows you to perform CRUD (Create, Read, Update, Delete) operations on
 
 ## Table of Contents
 - [Hosted API](#Hosted-API)
+- [UML Diagram](#UML_Diagram)
 - [Standard Formats for Requests and Responses](#Standard-Formats-for-Requests-and-Responses)
 - [Sample Usage of the Hosted API](#Sample-Usage-of-the-Hosted-API)
 - [Tests](#Tests)
@@ -15,6 +16,9 @@ This API allows you to perform CRUD (Create, Read, Update, Delete) operations on
 ### Hosted API
 
 [API](http://100.25.0.75/api)
+
+### UML Diagram
+[UML](./diagram.png)
 
 ### Standard Formats for Requests and Responses
 
