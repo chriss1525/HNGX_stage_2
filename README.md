@@ -18,7 +18,7 @@ This API allows you to perform CRUD (Create, Read, Update, Delete) operations on
 [API](http://100.25.0.75/api)
 
 ### UML Diagram
-[UML](./diagram.png)
+Here is the [UML diagram](./diagram.png) 
 
 ### Standard Formats for Requests and Responses
 
