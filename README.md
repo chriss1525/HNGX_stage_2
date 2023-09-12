@@ -1,14 +1,14 @@
 # API Documentation
 
 
-Welcome to the API documentation for the /api endpoint, which interacts with a Supabase database. 
+Welcome to the API documentation for the /api endpoint, which interacts with a Supabase database and queries them in postgresql. 
 
 This API allows you to perform CRUD (Create, Read, Update, Delete) operations on a "person" table in the database.
 
 ## Table of Contents
 - [Hosted API](#Hosted-API)
 - [Standard Formats for Requests and Responses](#Standard-Formats-for-Requests-and-Assumptions)
-- [Sample Usage of the API](#Sample-Usage-of-the-API)
+- [Sample Usage of the Hosted API](#Sample-Usage-of-the-Hosted-API)
 - [Testing](#Tests)
 - [Known Limitations and Assumptions](#Known-Limitations-and-Assumptions)
 - [Setting up and Deploying the API](#Setting-up-and-Deploying-the-API)
@@ -17,6 +17,8 @@ This API allows you to perform CRUD (Create, Read, Update, Delete) operations on
 ### Hosted API
 
 [API](http://100.25.0.75/api)
+
+
 ### Standard Formats for Requests and Responses
 
 #### Create a Person (POST /api/)
@@ -29,11 +31,9 @@ This API allows you to perform CRUD (Create, Read, Update, Delete) operations on
 - Body: JSON object representing a person
 
 
-**Example Request:**
+**Example Request Body:**
 
 ```json
-POST /api/
-Content-Type: application/json
 
 {
   "name": "John Doe",
@@ -46,7 +46,7 @@ Content-Type: application/json
 - Body: JSON object representing the created person
 
 
-**Example Response:**
+**Example Response Body:**
 
 ```json
 {
@@ -83,7 +83,7 @@ GET /api/John Doe
 - Body: JSON object representing the person
 
 
-**Example Response:**
+**Example Response Body:**
 
 ```json
 {
@@ -103,18 +103,18 @@ GET /api/John Doe
 - Body: JSON object representing the updated person data
 
 
-**Example Request (Update by ID):**
+**Example Request body (Update by ID):**
 
 ```json
 {
-  "name": "Jane Doe"
+  "name": "Jane_Doe"
 }
 ```
-**Example Request (Update by Name):**
+**Example Request body (Update by Name):**
 
 ```json
 {
-  "name": "Jane Doe"
+  "name": "Jane_Doe"
 }
 ```
 
@@ -125,12 +125,16 @@ GET /api/John Doe
 - Body: JSON object representing the updated person
 
 
-**Example Response:**
+**Example Response Body:**
 
 ```json
 {
-  "id": 1,
-  "name": "Jane Doe",
+    "message": "person updated",
+    "data": {
+        "id": 3,
+        "created_at": "2023-09-12T15:30:12.091249+00:00",
+        "name": "Jane_Doe"
+    }
 }
 ```
 #### Delete a Person (DELETE /api/:param)
@@ -161,7 +165,7 @@ DELETE /api/John_Doe
 - Body: JSON message showing person is deleted
 
 
-**Example Response:**
+**Example Response Body:**
 
 ```json
 {
@@ -169,14 +173,14 @@ DELETE /api/John_Doe
 }
 ```
 
-### Sample Usage of the API
+### Sample Usage of the Hosted API
 
 #### Create a Person
 
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{
-  "name": "John Doe"
+  "name": "John_Doe"
 }' http://100.25.0.75/api/
 ```
 #### Read One Person

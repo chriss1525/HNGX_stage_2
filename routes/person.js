@@ -81,7 +81,7 @@ router.put('/:param', validateIntegerOrString, validateString, async (req, res) 
       if (error) {
         return res.status(400).json({ error: error.message });
       }
-      res.status(200).json(message: "person updated", data);
+      res.status(200).json({message: "person updated", data});
     } else {
       const { data, error } = await supabase
         .from('person')
@@ -92,7 +92,7 @@ router.put('/:param', validateIntegerOrString, validateString, async (req, res) 
       if (error) {
         return res.status(400).json({ error: error.message });
       }
-      res.status(200).json( message: "person updated" ,data);
+      res.status(200).json({message: 'person updated', data});
     } 
 });
 
