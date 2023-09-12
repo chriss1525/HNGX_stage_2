@@ -8,6 +8,7 @@ This API allows you to perform CRUD (Create, Read, Update, Delete) operations on
 ## Table of Contents
 - [Standard Formats for Requests and Responses](#Standard-Formats-for-Requests-and-Assumptions)
 - [Sample Usage of the API](#Sample-Usage-of-the-API)
+- [Testing](#Tests)
 - [Known Limitations and Assumptions](#Known-Limitations-and-Assumptions)
 - [Setting up and Deploying the API](#Setting-up-and-Deploying-the-API)
 
@@ -225,6 +226,12 @@ curl -X DELETE http://domain/api/1
 # Delete by Name
 curl -X DELETE http://domain/api/John_Doe
 ```
+
+### Tests
+
+Check this postman collection for tests created for this API;
+
+https://gold-spaceship-212378.postman.co/workspace/HNGX-Workspace~e1d36fe1-5f2f-4fdd-8633-18e7cf7c0bd2/collection/29473948-bad537f4-e3aa-4f03-986c-e5094e2b0564?action=share&creator=29473948
 
 
 ### Known Limitations and Assumptions
