@@ -42,83 +42,91 @@ router.post('/', validateString, async (req, res) => {
 
 // Read one person
 router.get('/:param', validateIntegerOrString, async (req, res) => {
-    const param = req.params.param;
-    if (!isNaN(parseInt(param))) {
-      const id = parseInt(param);
-      const { data, error } = await supabase
-        .from('person')
-        .select('*')
-        .eq('id', id)
-        .single();
-      if (error) {
-        return res.status(400).json({ error: error.message });
-      }
-      res.status(200).json(data);
-    } else {
-      const { data, error } = await supabase
-        .from('person')
-        .select('*')
-        .eq('name', param)
-        .single();
-      if (error) {
-        return res.status(400).json({ error: error.message });
-      }
-      res.status(200).json(data);
-    } 
+  const param = req.params.param;
+  let query;
+  if (!isNaN(parseInt(param))) {
+    const id = parseInt(param);
+    query = supabase
+      .from('person')
+      .select('*')
+      .eq('id', id);
+  } else {
+    query = supabase
+      .from('person')
+      .select('*')
+      .eq('name', param);
+  }
+
+  const { data, error } = await query;
+  if (error) {
+    return res.status(400).json({ error: error.message });
+  }
+  
+  if (!data) {
+    return res.status(404).json({ error: 'Person not found.' });
+  }
+
+  res.status(200).json(data);
 });
 
 // Update a person's data
 router.put('/:param', validateIntegerOrString, validateString, async (req, res) => {
-    const param = req.params.param;
-    if (!isNaN(parseInt(param))) {
-      const id = parseInt(param);
-      const { data, error } = await supabase
-        .from('person')
-        .update(req.body)
-        .eq('id', id)
-        .select()
-        .single();
-      if (error) {
-        return res.status(400).json({ error: error.message });
-      }
-      res.status(200).json({message: "person updated", data});
-    } else {
-      const { data, error } = await supabase
-        .from('person')
-        .update(req.body)
-        .eq('name', param)
-        .select()
-        .single();
-      if (error) {
-        return res.status(400).json({ error: error.message });
-      }
-      res.status(200).json({message: 'person updated', data});
-    } 
+  const param = req.params.param;
+  let query;
+  if (!isNaN(parseInt(param))) {
+    const id = parseInt(param);
+    query = supabase
+      .from('person')
+      .update(req.body)
+      .eq('id', id)
+      .select('*');
+  } else {
+    query = supabase
+      .from('person')
+      .update(req.body)
+      .eq('name', param)
+      .select('*');
+  }
+
+  const { data, error } = await query;
+  if (error) {
+    return res.status(400).json({ error: error.message });
+  }
+
+  if (!data) {
+    return res.status(404).json({ error: 'Person not found.' });
+  }
+
+  res.status(200).json({ message: "person updated", data });
 });
 
 // Delete a person
 router.delete('/:param', validateIntegerOrString, async (req, res) => {
-    const param = req.params.param;
-    if (!isNaN(parseInt(param))) {
-      const id = parseInt(param);
-      const { data, error } = await supabase
-        .from('person')
-        .delete()
-        .eq('id', id);
-      if (error) {
-        return res.status(400).json({ error: error.message });
-      }
-      res.status(200).json({message: 'Person deleted.'});
-    } else {
-      const { data, error } = await supabase
-        .from('person')
-        .delete()
-        .eq('name', param);
-      if (error) {
-        return res.status(400).json({ error: error.message });
-      }
-      res.status(200).json({message: 'Person deleted.'});
-    } 
+  const param = req.params.param;
+  let query;
+  if (!isNaN(parseInt(param))) {
+    const id = parseInt(param);
+    query = supabase
+      .from('person')
+      .delete()
+      .eq('id', id);
+  } else {
+    query = supabase
+      .from('person')
+      .delete()
+      .eq('name', param);
+  }
+
+  const { data, error } = await query;
+  if (error) {
+    return res.status(400).json({ error: error.message });
+  }
+
+  if (!data || data.length === 0) {
+    return res.status(404).json({ error: 'Person not found.' });
+  }
+
+  res.status(200).json({ message: 'Person deleted.' }); 
 });
 
 module.exports = router;
