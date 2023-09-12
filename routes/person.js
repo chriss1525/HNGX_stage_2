@@ -42,14 +42,14 @@ router.post('/', validateString, async (req, res) => {
 
 // Read one person
 router.get('/:param', validateIntegerOrString, async (req, res) => {
-  try {
     const param = req.params.param;
     if (!isNaN(parseInt(param))) {
       const id = parseInt(param);
       const { data, error } = await supabase
         .from('person')
         .select('*')
-        .eq('id', id);
+        .eq('id', id)
+        .single();
       if (error) {
         return res.status(400).json({ error: error.message });
       }
@@ -64,44 +64,40 @@ router.get('/:param', validateIntegerOrString, async (req, res) => {
         return res.status(400).json({ error: error.message });
       }
       res.status(200).json(data);
-    }
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
+    } 
 });
 
 // Update a person's data
 router.put('/:param', validateIntegerOrString, validateString, async (req, res) => {
-  try {
     const param = req.params.param;
     if (!isNaN(parseInt(param))) {
       const id = parseInt(param);
       const { data, error } = await supabase
         .from('person')
         .update(req.body)
-        .eq('id', id);
+        .eq('id', id)
+        .select()
+        .single();
       if (error) {
         return res.status(400).json({ error: error.message });
       }
-      res.status(200).json(data);
+      res.status(200).json(message: "person updated", data);
     } else {
       const { data, error } = await supabase
         .from('person')
         .update(req.body)
-        .eq('name', param);
+        .eq('name', param)
+        .select()
+        .single();
       if (error) {
         return res.status(400).json({ error: error.message });
       }
-      res.status(200).json(data);
-    }
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
+      res.status(200).json( message: "person updated" ,data);
+    } 
 });
 
 // Delete a person
 router.delete('/:param', validateIntegerOrString, async (req, res) => {
-  try {
     const param = req.params.param;
     if (!isNaN(parseInt(param))) {
       const id = parseInt(param);
@@ -112,7 +108,7 @@ router.delete('/:param', validateIntegerOrString, async (req, res) => {
       if (error) {
         return res.status(400).json({ error: error.message });
       }
-      res.status(200).json(data);
+      res.status(200).json({message: 'Person deleted.'});
     } else {
       const { data, error } = await supabase
         .from('person')
@@ -121,12 +117,9 @@ router.delete('/:param', validateIntegerOrString, async (req, res) => {
       if (error) {
         return res.status(400).json({ error: error.message });
       }
-      res.status(200).json(data);
-    }
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
+      res.status(200).json({message: 'Person deleted.'});
+    } 
 });
 
 module.exports = router;
-
+``

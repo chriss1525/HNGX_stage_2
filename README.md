@@ -6,12 +6,17 @@ Welcome to the API documentation for the /api endpoint, which interacts with a S
 This API allows you to perform CRUD (Create, Read, Update, Delete) operations on a "person" table in the database.
 
 ## Table of Contents
+- [Hosted API](#Hosted-API)
 - [Standard Formats for Requests and Responses](#Standard-Formats-for-Requests-and-Assumptions)
 - [Sample Usage of the API](#Sample-Usage-of-the-API)
 - [Testing](#Tests)
 - [Known Limitations and Assumptions](#Known-Limitations-and-Assumptions)
 - [Setting up and Deploying the API](#Setting-up-and-Deploying-the-API)
 
+
+### Hosted API
+
+[API](http://100.25.0.75/api)
 ### Standard Formats for Requests and Responses
 
 #### Create a Person (POST /api/)
@@ -101,9 +106,6 @@ GET /api/John Doe
 **Example Request (Update by ID):**
 
 ```json
-PUT /api/1
-Content-Type: application/json
-
 {
   "name": "Jane Doe"
 }
@@ -111,9 +113,6 @@ Content-Type: application/json
 **Example Request (Update by Name):**
 
 ```json
-PUT /api/John_Doe
-Content-Type: application/json
-
 {
   "name": "Jane Doe"
 }
@@ -159,30 +158,18 @@ DELETE /api/John_Doe
 **Response Format:**
 
 - HTTP Status Code: 200 (OK) if deleted, 404 (Not Found) if not found
-- Body: JSON object representing the deleted person
+- Body: JSON message showing person is deleted
 
 
-**Example Response (by ID):**
-
-```json
-{
-  "id": 1,
-  "name": "John Doe",
-}
-```
-
-**Example Response (by Name):**
+**Example Response:**
 
 ```json
 {
-  "id": 2,
-  "name": "John Doe",
+    "message": "Person deleted."
 }
 ```
-
 
 ### Sample Usage of the API
-
 
 #### Create a Person
 
@@ -190,17 +177,17 @@ DELETE /api/John_Doe
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{
   "name": "John Doe"
-}' http://100.25.0.75:3002/api/
+}' http://100.25.0.75/api/
 ```
 #### Read One Person
 
 
 ```bash
 # Read by ID
-curl http://100.25.0.75:3002/api/1
+curl http://100.25.0.75/api/1
 
 # Read by Name
-curl http://100.25.0.75:3002/api/John_Doe
+curl http://100.25.0.75/api/John_Doe
 ```
 
 
@@ -209,22 +196,22 @@ curl http://100.25.0.75:3002/api/John_Doe
 # Update by ID
 curl -X PUT -H "Content-Type: application/json" -d '{
   "name": "Jane Doe"
-}' http://100.25.0.75:3002/api/1
+}' http://100.25.0.75/api/1
 
 # Update by Name
 curl -X PUT -H "Content-Type: application/json" -d '{
   "name": "Jane Doe"
-}' http://100.25.0.75:3002/api/John_Doe
+}' http://100.25.0.75/api/John_Doe
 ```
 
 
 #### Delete a Person
 ```bash
 # Delete by ID
-curl -X DELETE http://100.25.0.75:3002/api/1
+curl -X DELETE http://100.25.0.75/api/1
 
 # Delete by Name
-curl -X DELETE http://100.25.0.75:3002/api/John_Doe
+curl -X DELETE http://100.25.0.75/api/John_Doe
 ```
 
 ### Tests
