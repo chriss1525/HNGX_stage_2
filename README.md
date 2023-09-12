@@ -69,7 +69,7 @@ GET /api/1
 **Example Request (by Name):**
 
 ```bash
-GET /api/John_Doe
+GET /api/John Doe
 ```
 
 **Response Format:**
@@ -105,7 +105,7 @@ PUT /api/1
 Content-Type: application/json
 
 {
-  "name": "Jane_Doe"
+  "name": "Jane Doe"
 }
 ```
 **Example Request (Update by Name):**
@@ -115,7 +115,7 @@ PUT /api/John_Doe
 Content-Type: application/json
 
 {
-  "name": "Jane_Doe"
+  "name": "Jane Doe"
 }
 ```
 
@@ -131,7 +131,7 @@ Content-Type: application/json
 ```json
 {
   "id": 1,
-  "name": "Jane_Doe",
+  "name": "Jane Doe",
 }
 ```
 #### Delete a Person (DELETE /api/:param)
@@ -190,17 +190,17 @@ DELETE /api/John_Doe
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{
   "name": "John Doe"
-}' http://domain/api/
+}' http://100.25.0.75:3002/api/
 ```
 #### Read One Person
 
 
 ```bash
 # Read by ID
-curl http://domain/api/1
+curl http://100.25.0.75:3002/api/1
 
 # Read by Name
-curl http://domain/api/John_Doe
+curl http://100.25.0.75:3002/api/John_Doe
 ```
 
 
@@ -208,28 +208,28 @@ curl http://domain/api/John_Doe
 ```bash
 # Update by ID
 curl -X PUT -H "Content-Type: application/json" -d '{
-  "name": "Jane_Doe"
-}' http://domain/api/1
+  "name": "Jane Doe"
+}' http://100.25.0.75:3002/api/1
 
 # Update by Name
 curl -X PUT -H "Content-Type: application/json" -d '{
-  "name": "Jane_Doe"
-}' http://domain/api/John_Doe
+  "name": "Jane Doe"
+}' http://100.25.0.75:3002/api/John_Doe
 ```
 
 
 #### Delete a Person
 ```bash
 # Delete by ID
-curl -X DELETE http://domain/api/1
+curl -X DELETE http://100.25.0.75:3002/api/1
 
 # Delete by Name
-curl -X DELETE http://domain/api/John_Doe
+curl -X DELETE http://100.25.0.75:3002/api/John_Doe
 ```
 
 ### Tests
 
-Check this [postman collection](https://gold-spaceship-212378.postman.co/workspace/HNGX-Workspace~e1d36fe1-5f2f-4fdd-8633-18e7cf7c0bd2/collection/29473948-bad537f4-e3aa-4f03-986c-e5094e2b0564?action=share&creator=29473948) for tests created for this API;
+Check this [postman collection](https://gold-spaceship-212378.postman.co/workspace/HNGX-Workspace~e1d36fe1-5f2f-4fdd-8633-18e7cf7c0bd2/collection/29473948-bad537f4-e3aa-4f03-986c-e5094e2b0564?action=share&creator=2947394) for tests created for this API;
 
 
 
