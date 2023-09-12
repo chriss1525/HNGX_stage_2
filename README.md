@@ -229,9 +229,8 @@ curl -X DELETE http://domain/api/John_Doe
 
 ### Tests
 
-Check this postman collection for tests created for this API;
+Check this [postman collection](https://gold-spaceship-212378.postman.co/workspace/HNGX-Workspace~e1d36fe1-5f2f-4fdd-8633-18e7cf7c0bd2/collection/29473948-bad537f4-e3aa-4f03-986c-e5094e2b0564?action=share&creator=29473948) for tests created for this API;
 
-https://gold-spaceship-212378.postman.co/workspace/HNGX-Workspace~e1d36fe1-5f2f-4fdd-8633-18e7cf7c0bd2/collection/29473948-bad537f4-e3aa-4f03-986c-e5094e2b0564?action=share&creator=29473948
 
 
 ### Known Limitations and Assumptions
