@@ -1,28 +1,24 @@
 # API Documentation
 
-
-Welcome to the API documentation for the /api endpoint, which interacts with a Supabase database and queries them in postgresql. 
+Welcome to the API documentation for the /api endpoint, which interacts with a Supabase database and queries them in PostgreSQL.
 
 This API allows you to perform CRUD (Create, Read, Update, Delete) operations on a "person" table in the database.
 
 ## Table of Contents
 - [Hosted API](#Hosted-API)
-- [Standard Formats for Requests and Responses](#Standard-Formats-for-Requests-and-Assumptions)
+- [Standard Formats for Requests and Responses](#Standard-Formats-for-Requests-and-Responses)
 - [Sample Usage of the Hosted API](#Sample-Usage-of-the-Hosted-API)
-- [Testing](#Tests)
+- [Tests](#Tests)
 - [Known Limitations and Assumptions](#Known-Limitations-and-Assumptions)
 - [Setting up and Deploying the API](#Setting-up-and-Deploying-the-API)
-
 
 ### Hosted API
 
 [API](http://100.25.0.75/api)
 
-
 ### Standard Formats for Requests and Responses
 
 #### Create a Person (POST /api/)
-
 
 **Request Format:**
 
@@ -30,15 +26,14 @@ This API allows you to perform CRUD (Create, Read, Update, Delete) operations on
 - Endpoint: /api/
 - Body: JSON object representing a person
 
-
 **Example Request Body:**
 
 ```json
-
 {
-  "name": "John Doe",
+  "name": "John Doe"
 }
 ```
+
 
 **Response Format:**
 
@@ -46,17 +41,26 @@ This API allows you to perform CRUD (Create, Read, Update, Delete) operations on
 - Body: JSON object representing the created person
 
 
-**Example Response Body:**
+**Example Response Body (Success):**
 
 ```json
-[
-    {
-        "id": 1,
-        "created_at": "2023-09-12T15:14:47.67992+00:00",
-        "name": "Christine"
-    }
-]
+{
+    "id": 1,
+    "created_at": "2023-09-12T15:14:47.67992+00:00",
+    "name": "John Doe"
+}
 ```
+
+
+**Example Response Body (Error):**
+
+```json
+{
+    "error": "Person with the same name already exists."
+}
+```
+
+
 #### Read One Person (GET /api/:param)
 
 
@@ -73,28 +77,40 @@ This API allows you to perform CRUD (Create, Read, Update, Delete) operations on
 GET /api/1
 ```
 
-
 **Example Request (by Name):**
 
 ```bash
 GET /api/John Doe
 ```
 
+
 **Response Format:**
+
 
 - HTTP Status Code: 200 (OK) if found, 404 (Not Found) if not found
 - Body: JSON object representing the person
 
 
-**Example Response Body:**
+**Example Response Body (Success):**
 
 ```json
-    {
-        "id": 1,
-        "created_at": "2023-09-12T15:14:47.67992+00:00",
-        "name": "Christine"
-    }
+{
+    "id": 1,
+    "created_at": "2023-09-12T15:14:47.67992+00:00",
+    "name": "John Doe"
+}
 ```
+
+
+**Example Response Body (Error - Not Found):**
+
+
+```json
+{
+    "error": "Person not found."
+}
+```
+
 
 #### Update a Person's Data (PUT /api/:param)
 
@@ -111,14 +127,14 @@ GET /api/John Doe
 
 ```json
 {
-  "name": "Jane_Doe"
+  "name": "Jane Doe"
 }
 ```
-**Example Request body (Update by Name):**
+Example Request body (Update by Name):
 
 ```json
 {
-  "name": "Jane_Doe"
+  "name": "Jane Doe"
 }
 ```
 
@@ -129,22 +145,44 @@ GET /api/John Doe
 - Body: JSON object representing the updated person
 
 
-**Example Response Body:**
+**Example Response Body (Success):**
 
 ```json
 {
-    "message": "person updated",
+    "message": "Person updated.",
     "data": {
-        "id": 3,
-        "created_at": "2023-09-12T15:30:12.091249+00:00",
-        "name": "Jane_Doe"
+        "id": 1,
+        "created_at": "2023-09-12T15:14:47.67992+00:00",
+        "name": "Jane Doe"
     }
 }
 ```
+
+
+**Example Response Body (Error - Not Found):**
+
+
+```json
+{
+    "error": "Person not found."
+}
+```
+
+
+**Example Response Body (Error - Duplicate Name):**
+
+
+```json
+{
+    "error": "Person with the same name already exists."
+}
+```
+
+
 #### Delete a Person (DELETE /api/:param)
 
-
 **Request Format:**
+
 
 - HTTP Method: DELETE
 - Endpoint: /api/:param
@@ -156,12 +194,13 @@ GET /api/John Doe
 ```bash
 DELETE /api/1
 ```
+
 **Example Request (Delete by Name):**
 
-```bash
-DELETE /api/John_Doe
-```
 
+```bash
+DELETE /api/John Doe
+```
 
 **Response Format:**
 
@@ -169,7 +208,7 @@ DELETE /api/John_Doe
 - Body: JSON message showing person is deleted
 
 
-**Example Response Body:**
+**Example Response Body (Success):**
 
 ```json
 {
@@ -177,29 +216,42 @@ DELETE /api/John_Doe
 }
 ```
 
+
+**Example Response Body (Error - Not Found):**
+
+
+```json
+{
+    "error": "Person not found."
+}
+```
+
+
 ### Sample Usage of the Hosted API
 
-#### Create a Person
+
+**Create a Person**
 
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{
-  "name": "John_Doe"
+  "name": "John Doe"
 }' http://100.25.0.75/api/
 ```
-#### Read One Person
 
+
+**Read One Person**
 
 ```bash
 # Read by ID
 curl http://100.25.0.75/api/1
 
 # Read by Name
-curl http://100.25.0.75/api/John_Doe
+curl http://100.25.0.75/api/John Doe
 ```
 
+**Update a Person's Data**
 
-#### Update a Person's Data
 ```bash
 # Update by ID
 curl -X PUT -H "Content-Type: application/json" -d '{
@@ -209,35 +261,35 @@ curl -X PUT -H "Content-Type: application/json" -d '{
 # Update by Name
 curl -X PUT -H "Content-Type: application/json" -d '{
   "name": "Jane Doe"
-}' http://100.25.0.75/api/John_Doe
+}' http://100.25.0.75/api/John Doe
 ```
 
-
-#### Delete a Person
+**Delete a Person**
 ```bash
 # Delete by ID
 curl -X DELETE http://100.25.0.75/api/1
 
 # Delete by Name
-curl -X DELETE http://100.25.0.75/api/John_Doe
+curl -X DELETE http://100.25.0.75/api/John Doe
 ```
+
 
 ### Tests
 
-Check this [postman collection](https://gold-spaceship-212378.postman.co/workspace/HNGX-Workspace~e1d36fe1-5f2f-4fdd-8633-18e7cf7c0bd2/collection/29473948-bad537f4-e3aa-4f03-986c-e5094e2b0564?action=share&creator=2947394) for tests created for this API;
 
-
+- Check this [Postman collection](https://gold-spaceship-212378.postman.co/workspace/HNGX-Workspace~e1d36fe1-5f2f-4fdd-8633-18e7cf7c0bd2/collection/29473948-bad537f4-e3aa-4f03-986c-e5094e2b0564?action=share&creator=29473948) for tests created for this API.
 
 ### Known Limitations and Assumptions
+
 - This API assumes that the Supabase database is properly configured and accessible.
 - The API assumes that the "person" table exists in the database.
-- The API assumes all users have unique names
+- The API expects all persons to have unique names.
 
 
-#### Setting up and Deploying the API
+### Setting up and Deploying the API
 
 
-To set up and deploy the API locally or on a server, follow these steps:
+- To set up and deploy the API locally or on a server, follow these steps:
 
 - Clone the repository containing the API code.
 
@@ -247,4 +299,4 @@ To set up and deploy the API locally or on a server, follow these steps:
 
 - Run the API locally using npm start or yarn start.
 
-- Deploy the API to a server of your choice, ensuring that you configure environment variables for security and database access.
+- Deploy the API to a server of your choice, ensuring that you configure environment variables for security and database access

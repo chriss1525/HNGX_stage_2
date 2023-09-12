@@ -26,7 +26,23 @@ function validateIntegerOrString(req, res, next) {
 
 // Create a person
 router.post('/', validateString, async (req, res) => {
-  try {
+  const { name } = req.body;
+
+  // Check if a person with the same name already exists
+  const { data: existingData, error: existingError } = await supabase
+    .from('person')
+    .select('name')
+    .eq('name', name);
+
+  if (existingError) {
+    return res.status(400).json({ error: existingError.message });
+  }
+
+  if (existingData && existingData.length > 0) {
+    return res.status(400).json({ error: 'Person with the same name already exists.' });
+  }
+
+  // if person does not exist, create a new one
     const { data, error } = await supabase
       .from('person')
       .insert([req.body])
@@ -34,10 +50,7 @@ router.post('/', validateString, async (req, res) => {
     if (error) {
       return res.status(400).json({ error: error.message });
     }
-    res.status(201).json(data);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
+    res.status(201).json(data); 
 });
 
 // Read one person
@@ -73,6 +86,23 @@ router.get('/:param', validateIntegerOrString, async (req, res) => {
 router.put('/:param', validateIntegerOrString, validateString, async (req, res) => {
   const param = req.params.param;
   let query;
+
+  // Check if a person with the same name already exists (excluding the current person by ID)
+  const { name } = req.body;
+  const { data: existingData, error: existingError } = await supabase
+    .from('person')
+    .select('name')
+    .neq('id', param) // Exclude the current person by ID
+    .eq('name', name);
+
+  if (existingError) {
+    return res.status(400).json({ error: existingError.message });
+  }
+
+  if (existingData && existingData.length > 0) {
+    return res.status(400).json({ error: 'Person with the same name already exists.' });
+  }
+
   if (!isNaN(parseInt(param))) {
     const id = parseInt(param);
     query = supabase
@@ -120,10 +150,6 @@ router.delete('/:param', validateIntegerOrString, async (req, res) => {
   const { data, error } = await query;
   if (error) {
     return res.status(400).json({ error: error.message });
-  }
-
-  if (!data) {
-    return res.status(404).json({ error: 'Person not found.' });
   }
 
   res.status(200).json({ message: 'Person deleted.' }); 
